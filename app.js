@@ -119,45 +119,7 @@ app.get('/contact', function (req, res) {
 });
 
 app.get('/module/:id', function (req, res) {
-    res.send(
-            '<!DOCTYPE html>'
-        +   '<html lang="fr">'
-        +   '<head>'
-        +       '<meta charset="UTF-8">'
-        +       '<title>Super Awesome</title>'
-        +       '<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">'
-        +   '</head>'
-        +   '<body class="container">'
-        +       '<header>'
-        +           '<nav class="navbar navbar-default" role="navigation">'
-        +               '<div class="container-fluid">'
-        +                   '<div class="navbar-header">'
-        +                       '<a class="navbar-brand" href="#">'
-        +                           '<span class="glyphicon glyphicon glyphicon-tree-deciduous"></span>'
-        +                           'EJS Is Fun'
-        +                       '</a>'
-        +                   '</div>'
-        +                   '<ul class="nav navbar-nav">'
-        +                       '<li><a href="/">Home</a></li>'
-        +                       '<li><a href="/contact">Contact</a></li>'
-        +                   '</ul>'
-        +               '</div>'
-        +           '</nav>'
-        +       '</header>'
-        
-        +       '<main>'
-        +           '<div class="jumbotron">'
-        +               '<p>Module ' + ((req.params.id>='1' && req.params.id<='6') ? req.params.id : 'inconnu') + '</p>'
-        +           '</div>'
-        +       '</main>'
-
-        +       '<footer>'
-        +           '<p class="text-center text-muted">© Copyright 2024 William Robert</p>'
-        +       '</footer>'
-
-        +   '</body>'
-        +   '</html>'
-    );
+    res.render('module.ejs', { id: req.params.id });
 });
 
 app.use(function (req, res) {
