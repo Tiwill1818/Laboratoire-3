@@ -9,47 +9,10 @@
 
 var express = require('express');
 var app = express();
-
+var m1, m2, m3, m4, m5, m6 = false;
+var idString;
 app.get('/', function (req, res) {
-    res.send(
-            '<!DOCTYPE html>'
-        +   '<html lang="fr">'
-        +   '<head>'
-        +       '<meta charset="UTF-8">'
-        +       '<title>Super Awesome</title>'
-        +       '<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">'
-        +   '</head>'
-        +   '<body class="container">'
-        +       '<header>'
-        +           '<nav class="navbar navbar-default" role="navigation">'
-        +               '<div class="container-fluid">'
-        +                   '<div class="navbar-header">'
-        +                       '<a class="navbar-brand" href="#">'
-        +                           '<span class="glyphicon glyphicon glyphicon-tree-deciduous"></span>'
-        +                           'EJS Is Fun'
-        +                       '</a>'
-        +                   '</div>'
-        +                   '<ul class="nav navbar-nav">'
-        +                       '<li><a href="/">Home</a></li>'
-        +                       '<li><a href="/contact">Contact</a></li>'
-        +                   '</ul>'
-        +               '</div>'
-        +           '</nav>'
-        +       '</header>'
-        
-        +       '<main>'
-        +           '<div class="jumbotron">'
-        +               '<h1> Bienvenue dans mon super site ! </h1>'
-        +           '</div>'
-        +       '</main>'
-
-        +       '<footer>'
-        +           '<p class="text-center text-muted">© Copyright 2024 William Robert</p>'
-        +       '</footer>'
-
-        +   '</body>'
-        +   '</html>'
-    );
+    res.render('index.ejs');
 });
 
 app.get('/contact', function (req, res) {
@@ -119,7 +82,48 @@ app.get('/contact', function (req, res) {
 });
 
 app.get('/module/:id', function (req, res) {
-    res.render('module.ejs', { id: req.params.id });
+    switch (req.params.id) {
+        case '1':
+            m1 = !m1;
+            idString = m1 ? 'on' : 'off';
+            break;
+        case '2':
+            m2 = !m2;
+            idString = m2 ? 'on' : 'off';
+            break;
+        case '3':
+            m3 = !m3;
+            idString = m3 ? 'on' : 'off';
+            break;
+        case '4':
+            m4 = !m4;
+            idString = m4 ? 'on' : 'off';
+            break;
+        case '5':
+            m5 = !m5;
+            idString = m5 ? 'on' : 'off';
+            break;
+        case '6':
+            m6 = !m6;
+            idString = m6 ? 'on' : 'off';
+            break;
+        case 'reset':
+            m1 = m2 = m3 = m4 = m5 = m6 = false;
+            idString = 'reset';
+            break;
+        case 'controle':
+            idString = '1=' + (m1 ? 'on' : 'off') + '   '
+                + '2=' + (m2 ? 'on' : 'off') + '   '
+                + '3=' + (m3 ? 'on' : 'off') + '   '
+                + '4=' + (m4 ? 'on' : 'off') + '   '
+                + '5=' + (m5 ? 'on' : 'off') + '   '
+                + '6=' + (m6 ? 'on' : 'off');
+            break;
+        default:
+            idString = 'inconnu';
+            break;
+    }
+    res.render('module.ejs', { id: idString });
 });
 
 app.use(function (req, res) {
